@@ -1,0 +1,69 @@
+<h3>Post Section</h3>
+<button class="pull-right" (click)="addRow=true;">Create Post</button>
+  <br/>
+  <br/>
+  <div class="data-table">
+<table>
+		<thead>
+			<tr>
+				<th>Post Id</th>
+				<th> Id</th>
+        <th>Title</th>
+				<th>Body</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+      	<tr *ngIf="addRow">
+	     <td><input type="number" id="newUserId" autocomplete="off" [(ngModel)]="newAttribute.userId" name="newUserId"  placeholder="Enter UserId"> </td>
+       <td><input type="number" id="newId" autocomplete="off" [(ngModel)]="newAttribute.id" name="newId"  placeholder="Enter ID"> </td>
+       <td><input type="text" id="newName" autocomplete="off" [(ngModel)]="newAttribute.title" name="newName"  placeholder="Enter Name"> </td>
+				<td><input type="text" id="newBody" autocomplete="off" [(ngModel)]="newAttribute.body" name="newBody"  placeholder="Body"> </td>
+				<td>
+          	<button (click)="createPost(newAttribute);addRow=false;" class="half-margin-right">Add</button>
+            <button (click)="addRow=false;">Cancel</button>
+        </td>
+    </tr>
+		<tr>
+				<td>{{postDetailsResponse.userId}}</td>
+				<td>{{postDetailsResponse.id}}	<td> 
+            <span *ngIf="!postDetailsResponse.editable">{{postDetailsResponse.title}}</span>
+           <input *ngIf="postDetailsResponse.editable" type="text" autocomplete="off" [(ngModel)]="postDetailsResponse.title" placeholder="Enter post title">
+        </td>
+				<td> <span *ngIf="!postDetailsResponse.editable"> {{postDetailsResponse.body}}</span>
+         <input *ngIf="postDetailsResponse.editable" type="text" autocomplete="off" [(ngModel)]="postDetailsResponse.body" placeholder="Enter body"> 
+        </td>
+				<td>
+				<button *ngIf="!postDetailsResponse.editable"  (click)="updatePost(postDetailsResponse);">Update</button>
+        <button *ngIf="postDetailsResponse.editable" class="half-margin-right" (click)="save(postDetailsResponse);">Save</button>
+        <button *ngIf="postDetailsResponse.editable"  (click)="cancelPost(postDetailsResponse);">Cancel</button>
+        </td>
+    </tr>    		
+  </tbody>
+</table>
+</div>
+
+<!-- comments section -->
+<h3>Comments Section</h3>
+<div class="data-table">
+<table>
+		<thead>
+			<tr>
+				<th>Post Id</th>
+				<th> Id</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Body</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of commentsDetailsResponse">
+				<td>{{item.postId}} </td>
+				<td>{{item.id}}</td>        
+				<td>{{item.name}}</td>
+				<td>{{item.email}}</td>
+				<td>{{item.body}}</td>      
+			</tr>
+  </tbody>
+</table>
+</div>
